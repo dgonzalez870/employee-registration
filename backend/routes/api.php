@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\CountriesController;
+use App\Http\Controllers\Countries\FindAllCountriesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -9,5 +9,5 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::prefix('countries')->group(function () {
-    Route::get('/', [CountriesController::class, 'exec']);
+    Route::get('/', [FindAllCountriesController::class, 'exec']);
 });
