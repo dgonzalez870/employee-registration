@@ -8,14 +8,6 @@ use Illuminate\Database\Seeder;
 
 class JobAreaSeeder extends Seeder
 {
-    private function addFakeDescription(string $name)
-    {
-        return [
-            'name' => $name,
-            'description' => fake()->text(1000),
-        ];
-    }
-
     /**
      * Run the database seeds.
      */
@@ -31,6 +23,11 @@ class JobAreaSeeder extends Seeder
             'Servicios Varios',
 
         ];
-        JobArea::insert(array_map('addFakeDescription', $jobAreaNames));
+        JobArea::insert(array_map(function (string $name) {
+            return [
+                'name' => $name,
+                'description' => fake()->text(1000),
+            ];
+        }, $jobAreaNames));
     }
 }
