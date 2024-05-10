@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Countries\FindAllCountriesController;
 use App\Http\Controllers\IdDocuments\FindAllIdDocumentsController;
+use App\Http\Controllers\JobAreas\FindAllJobAreasController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,4 +16,8 @@ Route::prefix('countries')->group(function () {
 
 Route::prefix('documents')->group(function () {
     Route::get('/', [FindAllIdDocumentsController::class, 'exec']);
+});
+
+Route::prefix('jobareas')->group(function () {
+    Route::get('/', [FindAllJobAreasController::class, 'exec']);
 });
