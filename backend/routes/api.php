@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Countries\FindAllCountriesController;
+use App\Http\Controllers\Employees\SearchController;
 use App\Http\Controllers\IdDocuments\FindAllIdDocumentsController;
 use App\Http\Controllers\JobAreas\FindAllJobAreasController;
 use Illuminate\Http\Request;
@@ -20,4 +21,8 @@ Route::prefix('documents')->group(function () {
 
 Route::prefix('jobareas')->group(function () {
     Route::get('/', [FindAllJobAreasController::class, 'exec']);
+});
+
+Route::prefix('employees')->group(function () {
+    Route::get('/', [SearchController::class, 'exec']);
 });
