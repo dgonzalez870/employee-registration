@@ -17,6 +17,18 @@ class UpdateEmployeeController extends Controller
 
     public function exec(Request $request, int $id)
     {
-        return $this->service->exec($id, $request->json()->all());
+        $validated = $request->validate([
+            'first_surname' => 'required|string|uppercase|max:20|regex:/[A-Z\s]/',
+            'second_surname' => 'required|string|uppercase|max:20|regex:/[A-Z\s]/',
+            'first_name' => 'required|string|uppercase|max:20|regex:/[A-Z\s]/',
+            'other_names' => 'nullable|string|uppercase|max:50|regex:/[A-Z\s]/',
+            'id_code' => 'nullable|string|max:20|regex:/^[A-Za-z0-9]/',
+            'id_document_id' => 'nullable|integer',
+            'country_id' => 'nullable|integer',
+            'job_area_id' => 'nullable|integer',
+            'admission_date' => 'nullable|date'
+        ]);
+
+        return $this->service->exec($id, $validated);
     }
 }
