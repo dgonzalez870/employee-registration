@@ -1,7 +1,10 @@
 import {
   Component,
   HostBinding,
+  Input,
 } from '@angular/core';
+
+import { EmployeeInfo } from '../models/employee-info';
 
 @Component({
   selector: 'app-employees-info-card',
@@ -13,4 +16,6 @@ import {
 export class EmployeesInfoCardComponent {
 
   @HostBinding('class') class = 'block';
+
+  @Input() data!: EmployeeInfo;
 }
