@@ -22,11 +22,11 @@ class RegisterEmployeeController extends Controller
             'second_surname' => 'required|string|uppercase|max:20|regex:/[A-Z\s]/',
             'first_name' => 'required|string|uppercase|max:20|regex:/[A-Z\s]/',
             'other_names' => 'nullable|string|uppercase|max:50|regex:/[A-Z\s]/',
-            'id_code' => 'nullable|string|max:20|regex:/^[A-Za-z0-9]/',
-            'id_document_id' => 'nullable|integer',
-            'country_id' => 'nullable|integer',
-            'job_area_id' => 'nullable|integer',
-            'admission_date' => 'nullable|date'
+            'country_id' => 'required|integer',
+            'id_code' => 'required|string|max:20|regex:/^[A-Za-z0-9]/',
+            'id_document_id' => 'required|integer',
+            'job_area_id' => 'required|integer',
+            'admission_date' => 'required|date'
         ]);
 
         return $this->service->exec($validated);
