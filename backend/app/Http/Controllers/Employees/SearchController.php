@@ -16,8 +16,8 @@ class SearchController extends Controller
         $this->service = $service;
     }
 
-    public function exec(): Collection
+    public function exec(Request $request): Collection
     {
-        return $this->service->exec();
+        return $this->service->exec($request->query());
     }
 }
