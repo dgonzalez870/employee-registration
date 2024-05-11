@@ -18,15 +18,15 @@ return new class extends Migration
             $table->string('second_surname', 20);
             $table->string('first_name', 20);
             $table->string('other_names', 50)->nullable(true);
-            $table->bigInteger('job_country');
-            $table->bigInteger('id_document');
-            $table->string('id_number', 20);
-            $table->string('email', 300);
+            $table->foreignId('country_id')->constrained()->comment('País para el cual el empleado prestará sus servicios');
+            $table->foreignId('id_document_id')->constrained()->comment('Tipo de Identificación');
+            $table->string('id_number', 20)->unique();
+            $table->string('email', 300)->unique();
             $table->date('admission_date');
-            $table->bigInteger('job_area');
+            $table->foreignId('job_area_id')->constrained()->comment('Área para la cual fue contratado el empleado');
             $table->string('status')->default('Activo');
-            $table->timestamp('created_at', 0)->default(DB::raw('CURRENT_TIMESTAMP'));
-            $table->timestamp('updated_at', 0)->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('created_at', 0)->default(DB::raw('CURRENT_TIMESTAMP'))->comment('Fecha y hora del registro de usuario');
+            $table->timestamp('updated_at', 0)->comment('Fecha y hora de la última actualizacion del registro de usuario')->default(DB::raw('CURRENT_TIMESTAMP'))->onUpdate(DB::raw('CURRENT_TIMESTAMP'));
         });
     }
 

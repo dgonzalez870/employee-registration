@@ -14,12 +14,11 @@ class Employee extends Model
         'second_surname',
         'first_name',
         'other_names',
-        'job_country',
-        'id_document',
+        'country_id',
+        'id_document_id',
         'id_number',
         'email',
         'admission_date',
-        'job_area',
-        'status',
+        'job_area_id',
     ];
 }
