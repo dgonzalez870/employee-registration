@@ -16,7 +16,7 @@ class Employee extends Model
         'other_names',
         'country_id',
         'id_document_id',
-        'id_number',
+        'id_code',
         'email',
         'admission_date',
         'job_area_id',
