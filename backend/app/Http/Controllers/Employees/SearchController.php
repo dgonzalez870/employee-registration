@@ -16,6 +16,16 @@ class SearchController extends Controller
         $this->service = $service;
     }
 
+    /**
+     * @OA\Get(
+     *   tags={"Employees"},
+     *   path="employees",
+     *   summary="Search for users with the given properties",
+     *   @OA\Parameter(ref="#/components/parameters/id"),
+     *   @OA\Response(response=200, description="A list of employees"),
+     *   @OA\Response(response=401, description="Unauthorized"),
+     * )
+     */
     public function exec(Request $request): Collection
     {
         return $this->service->exec($request->query());
