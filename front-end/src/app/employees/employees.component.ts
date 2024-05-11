@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import {
+  Component,
+  HostBinding,
+} from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 
 @Component({
@@ -9,4 +12,6 @@ import { RouterOutlet } from '@angular/router';
   styleUrl: './employees.component.scss',
   providers: [],
 })
-export class EmployeesComponent {}
+export class EmployeesComponent {
+  @HostBinding('class') class = 'block grow';
+}

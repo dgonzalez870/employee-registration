@@ -5,10 +5,13 @@
 html,
 body {
   box-sizing: border-box;
+  padding: 0px;
+  margin: 0px;
 }
 
 body {
   min-height: 100vh;
+  display: flex;
 }
 
 html {
