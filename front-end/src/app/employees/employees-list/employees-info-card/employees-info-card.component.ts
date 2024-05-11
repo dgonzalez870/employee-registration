@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   HostBinding,
   Input,
@@ -11,10 +12,10 @@ import { EmployeeInfo } from '../models/employee-info';
   standalone: true,
   imports: [],
   templateUrl: './employees-info-card.component.html',
-  styleUrl: './employees-info-card.component.scss'
+  styleUrl: './employees-info-card.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class EmployeesInfoCardComponent {
-
   @HostBinding('class') class = 'block';
 
   @Input() data!: EmployeeInfo;
