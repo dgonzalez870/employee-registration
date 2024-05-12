@@ -1,0 +1,37 @@
+<button
+  type="button"
+  class="min-w-16 min-h-16"
+  appFormcontrolUi
+  (onPageChange)="('start')"
+>
+  <<
+</button>
+<button
+  type="button"
+  class="min-w-16 min-h-16"
+  appFormcontrolUi
+  (onPageChange)="('prev')"
+>
+  <
+</button>
+<span
+  appFormcontrolUi
+  class="min-w-16 min-h-16 flex items-center justify-center"
+  >{{ currentPage }} / {{ totalPages }}</span
+>
+<button
+  type="button"
+  class="min-w-16 min-h-16"
+  appFormcontrolUi
+  (onPageChange)="('next')"
+>
+  >
+</button>
+<button
+  type="button"
+  class="min-w-16 min-h-16"
+  appFormcontrolUi
+  (onPageChange)="('end')"
+>
+  >>
+</button>

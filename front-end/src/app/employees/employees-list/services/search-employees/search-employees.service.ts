@@ -9,13 +9,12 @@ import { EmployeeInfo } from '../../models/employee-info';
 import { FakeEmployees } from './fake-data';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SearchEmployeesService {
-
-  constructor() { }
+  constructor() {}
 
   public exec(): Observable<EmployeeInfo[]> {
-    return of(FakeEmployees);
+    return of(FakeEmployees.slice(0, 3));
   }
 }

@@ -22,6 +22,7 @@ import {
 } from 'rxjs';
 
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
+import { PaginatorComponent } from '../../lib/paginator';
 import { SelectMultipleComponent } from '../../lib/select-multiple';
 import {
   EmployeesInfoCardComponent,
@@ -37,12 +38,13 @@ import { EmployeesListService } from './employees-list.service';
     ReactiveFormsModule,
     FormcontrolUiDirective,
     SelectMultipleComponent,
+    PaginatorComponent,
   ],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss',
 })
 export class EmployeesListComponent implements OnInit, OnDestroy {
-  @HostBinding('class') className = 'block h-full';
+  @HostBinding('class') className = 'flex flex-col h-full';
 
   public employees$ = this.employeesListService.getEmployees$();
   public countries$ = this.employeesListService.getCountries$();
@@ -93,4 +95,6 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.sub$.unsubscribe();
   }
+
+  onPageChange(event: number): void {}
 }
