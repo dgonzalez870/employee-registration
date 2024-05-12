@@ -16,6 +16,7 @@ import {
 import {
   LoadJobAreasService,
 } from './services/load-job-areas/load-job-areas.service';
+import { RemoveService } from './services/remove/remove.service';
 import { EmployeeSearchParams } from './services/search-employees/models';
 import {
   SearchEmployeesService,
@@ -45,7 +46,8 @@ export class EmployeesListService {
     private searchEmployeesService: SearchEmployeesService,
     private loadCountriesService: LoadCountriesService,
     private loadDocumentsService: LoadDocumentsService,
-    private loadJobAreasService: LoadJobAreasService
+    private loadJobAreasService: LoadJobAreasService,
+    private deleteService: RemoveService
   ) {}
 
   public getEmployees$(): Observable<EmployeeInfo[]> {
@@ -85,6 +87,14 @@ export class EmployeesListService {
   public loadJobAreas(): void {
     this.loadJobAreasService.exec().subscribe((jobAreas) => {
       this.jobAreas$.next(jobAreas);
+    });
+  }
+
+  public delete(id: number): void {
+    this.deleteService.exec(id).subscribe(() => {
+      this.employees$.next(
+        this.employees$.getValue().filter((employee) => employee.id !== id)
+      );
     });
   }
 }

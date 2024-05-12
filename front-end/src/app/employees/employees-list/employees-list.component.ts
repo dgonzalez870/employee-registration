@@ -62,6 +62,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
     jobAreas: [''],
   });
 
+  private selectedId!: number;
   private sub$ = new Subscription();
 
   constructor(
@@ -116,6 +117,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   onCardAction(action: string, id: number): void {
     if (action === 'delete') {
+      this.selectedId = id;
       this.showModal = true;
     }
 
@@ -126,5 +128,6 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   removeUser(): void {
     this.showModal = false;
+    this.employeesListService.delete(this.selectedId);
   }
 }
