@@ -112,4 +112,15 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
       },
     });
   }
+
+  onCardAction(action: string, id: number): void {
+    if (action === 'delete') {
+      // Handle delete action
+      alert('delete');
+    }
+
+    if (action === 'edit') {
+      this.router.navigate([`/employees/edit/${id}`]);
+    }
+  }
 }

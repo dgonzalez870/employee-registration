@@ -1,8 +1,10 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  EventEmitter,
   HostBinding,
   Input,
+  Output,
 } from '@angular/core';
 
 import { EmployeeInfo } from '../models/employee-info';
@@ -19,4 +21,14 @@ export class EmployeesInfoCardComponent {
   @HostBinding('class') class = 'block';
 
   @Input() data!: EmployeeInfo;
+
+  @Output() action = new EventEmitter<string>();
+
+  onEdit(): void {
+    this.action.emit('edit');
+  }
+
+  onDelete(): void {
+    this.action.emit('delete');
+  }
 }

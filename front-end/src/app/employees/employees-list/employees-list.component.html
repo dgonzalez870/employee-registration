@@ -39,12 +39,13 @@
   />
 </div>
 <div
-  class="cards-container container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grow"
+  class="cards-container container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 grow"
 >
   @for (item of employees$ | async; track $index) {
   <app-employees-info-card
     class="shadow-lg rounded p-4 max-h-30"
     [data]="item"
+    (action)="onCardAction($event, item.id)"
   ></app-employees-info-card>
   }
 </div>

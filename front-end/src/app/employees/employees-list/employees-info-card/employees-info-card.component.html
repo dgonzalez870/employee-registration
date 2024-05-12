@@ -1,11 +1,19 @@
 <div class="text-slate-950 font-bold">{{ data.name }}</div>
-<div class="text-blue-500">{{ data.email }}</div>
+<div class="text-blue-500 font-bold">{{ data.email }}</div>
+<div>
+  {{ data.document }}<span></span>
+  <span class="font-bold ml-2">{{ data.idCode }}</span>
+</div>
 <div class="flex">
   <div>{{ data.country }}</div>
   &nbsp;/&nbsp;
   <div class="text-gray-500 font-bold">{{ data.jobArea }}</div>
 </div>
-<div>
-  {{ data.document }}<span></span>
-  <span class="font-bold ml-2">{{ data.idCode }}</span>
+<div class="flex justify-end">
+  <button type="button" class="p-2 text-red-500" (click)="onDelete()">
+    Remover
+  </button>
+  <button type="button" class="p-2 text-blue-500" (click)="onEdit()">
+    Editar
+  </button>
 </div>
