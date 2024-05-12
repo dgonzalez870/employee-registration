@@ -1,28 +1,29 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import {
+  map,
   Observable,
-  of,
 } from 'rxjs';
 
+import { environment } from '../../../../../environments/environment';
 import { SelectOptions } from '../../../../lib/select-multiple';
+import {
+  selectServiceResponse2Selectoptions,
+} from '../mappers/select-service-response-2-select-option';
+import { SelectServiceResponse } from '../models/select-service-response';
 
 @Injectable({
   providedIn: 'root',
 })
 export class LoadJobAreasService {
-  constructor() {}
+  constructor(private httpClient: HttpClient) {}
 
   public exec(): Observable<SelectOptions[]> {
-    return of([
-      {
-        label: 'DevTest',
-        value: '1',
-      },
-      {
-        label: 'Opperation',
-        value: '2',
-      },
-    ]);
+    return this.httpClient
+      .get<SelectServiceResponse[]>(`${environment.api.url}/jobareas`)
+      .pipe(
+        map((response) => response.map(selectServiceResponse2Selectoptions))
+      );
   }
 }
