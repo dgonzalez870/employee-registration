@@ -16,6 +16,7 @@ import {
 import {
   LoadJobAreasService,
 } from './services/load-job-areas/load-job-areas.service';
+import { EmployeeSearchParams } from './services/search-employees/models';
 import {
   SearchEmployeesService,
 } from './services/search-employees/search-employees.service';
@@ -63,8 +64,8 @@ export class EmployeesListService {
     return this.jobAreas$.asObservable();
   }
 
-  public searchEmployees(): void {
-    this.searchEmployeesService.exec().subscribe((employees) => {
+  public searchEmployees(query: EmployeeSearchParams): void {
+    this.searchEmployeesService.exec(query).subscribe((employees) => {
       this.employees$.next(employees);
     });
   }

@@ -51,6 +51,9 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
   public documents$ = this.employeesListService.getDocuments$();
   public jobAreas$ = this.employeesListService.getJobAreas$();
 
+  public page = 1;
+  public totalPages = 10;
+
   public searchForm: FormGroup = this.formBuilder.group({
     term: [''],
     countries: [''],
@@ -71,10 +74,13 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
     this.employeesListService.loadCountries();
     this.employeesListService.loadDocuments();
     this.employeesListService.loadJobAreas();
-    this.employeesListService.searchEmployees();
 
     this.sub$.add(
       this.activatedRoute.queryParams.subscribe((params) => {
+        this.employeesListService.searchEmployees({
+          ...params,
+        });
+        this.page = params['page'] ? +params['page'] : 1;
         this.searchForm.patchValue(params, { emitEvent: false });
       })
     );
@@ -86,6 +92,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
           this.router.navigate([], {
             queryParams: {
               ...value,
+              page: this.page,
             },
           });
         })
@@ -96,5 +103,13 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
     this.sub$.unsubscribe();
   }
 
-  onPageChange(event: number): void {}
+  onPageChange(event: number): void {
+    this.page = event;
+    this.router.navigate([], {
+      queryParamsHandling: 'merge',
+      queryParams: {
+        page: this.page,
+      },
+    });
+  }
 }

@@ -1,0 +1,7 @@
+:host {
+  .cards-container {
+    height: calc(100% - 20rem);
+    overflow: auto;
+    padding: 1rem;
+  }
+}

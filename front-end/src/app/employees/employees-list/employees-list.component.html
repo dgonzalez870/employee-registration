@@ -39,16 +39,20 @@
   />
 </div>
 <div
-  class="container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grow"
+  class="cards-container container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3 grow"
 >
   @for (item of employees$ | async; track $index) {
   <app-employees-info-card
-    class="shadow-lg rounded p-4 max-h-52"
+    class="shadow-lg rounded p-4 max-h-30"
     [data]="item"
   ></app-employees-info-card>
   }
 </div>
 
 <div class="flex justify-center">
-  <app-paginator (pageChange)="onPageChange($event)"></app-paginator>
+  <app-paginator
+    [currentPage]="page"
+    [totalPages]="totalPages"
+    (pageChange)="onPageChange($event)"
+  ></app-paginator>
 </div>

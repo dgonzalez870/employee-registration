@@ -7,6 +7,7 @@ import {
 
 import { EmployeeInfo } from '../../models/employee-info';
 import { FakeEmployees } from './fake-data';
+import { EmployeeSearchParams } from './models';
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +15,10 @@ import { FakeEmployees } from './fake-data';
 export class SearchEmployeesService {
   constructor() {}
 
-  public exec(): Observable<EmployeeInfo[]> {
-    return of(FakeEmployees.slice(0, 3));
+  public exec(query: EmployeeSearchParams): Observable<EmployeeInfo[]> {
+    const { page = 1, pageSize = 10 } = query;
+    const offset = (page - 1) * pageSize;
+    const limit = offset + pageSize;
+    return of(FakeEmployees.slice(offset, limit));
   }
 }

@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   EventEmitter,
   HostBinding,
@@ -14,6 +15,7 @@ import { FormcontrolUiDirective } from '../formcontrol-ui';
   imports: [FormcontrolUiDirective],
   templateUrl: './paginator.component.html',
   styleUrl: './paginator.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PaginatorComponent {
   @HostBinding('class') classes = 'flex';
