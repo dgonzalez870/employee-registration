@@ -1,11 +1,33 @@
 <div class="flex justify-end p-4 gap-8" [formGroup]="searchForm">
-  <select appFormcontrolUi name="document" id="document">
-    <option value="1">Cedula</option>
-    <option value="2">Pasaporte</option>
+  <select
+    appFormcontrolUi
+    name="documents"
+    id="documents"
+    formControlName="documents"
+  >
+    @for (item of documents$ | async; track $index) {
+    <option [value]="item.value">{{ item.label }}</option>
+    }
   </select>
-  <select appFormcontrolUi name="jobArea" id="jobArea">
-    <option value="1">Admin</option>
-    <option value="2">Dev</option>
+  <select
+    appFormcontrolUi
+    name="countries"
+    id="countries"
+    formControlName="countries"
+  >
+    @for (item of countries$ | async; track $index) {
+    <option [value]="item.value">{{ item.label }}</option>
+    }
+  </select>
+  <select
+    appFormcontrolUi
+    name="jobAreas"
+    id="jobAreas"
+    formControlName="jobAreas"
+  >
+    @for (item of jobAreas$ | async; track $index) {
+    <option [value]="item.value">{{ item.label }}</option>
+    }
   </select>
   <input
     appFormcontrolUi
