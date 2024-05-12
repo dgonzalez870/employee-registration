@@ -23,6 +23,7 @@ import {
 import {
   LoadJobAreasService,
 } from '../services/load-job-areas/load-job-areas.service';
+import { EmployeeFormService } from './employee-form.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -68,7 +69,8 @@ export class EmployeeFormComponent {
     private location: Location,
     private loadCountriesService: LoadCountriesService,
     private loadDocumentsService: LoadDocumentsService,
-    private loadJobAreasService: LoadJobAreasService
+    private loadJobAreasService: LoadJobAreasService,
+    private employeeFormService: EmployeeFormService
   ) {}
 
   save(): void {}
