@@ -18,6 +18,20 @@ export const routes: Routes = [
             (m) => m.EmployeesListComponent
           ),
       },
+      {
+        path: 'form',
+        loadComponent: () =>
+          import('./employee-form/employee-form.component').then(
+            (m) => m.EmployeeFormComponent
+          ),
+      },
+      {
+        path: 'form/:id',
+        loadComponent: () =>
+          import('./employee-form/employee-form.component').then(
+            (m) => m.EmployeeFormComponent
+          ),
+      },
     ],
   },
 ];

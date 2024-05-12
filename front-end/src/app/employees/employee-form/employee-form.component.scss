@@ -1,0 +1,10 @@
+:host {
+  label {
+    &:not(.optional) {
+      &::after {
+        content: "*";
+        color: red;
+      }
+    }
+  }
+}

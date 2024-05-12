@@ -1,1 +1,105 @@
-<p>employee-form works!</p>
+<form [formGroup]="form" class="container mx-auto p-4 sm:p-16">
+  <h1 class="text-xl font-bold mb-8">Registro de usuario</h1>
+  <div class="flex flex-col sm:flex-row gap-x-4 mb-4">
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="first_surname">Primer Apellido</label>
+      <input
+        type="text"
+        name="first_surname"
+        id="first_surname"
+        appFormcontrolUi
+        formControlName="first_surname"
+      />
+    </div>
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="second_surname">Segundo Apellido</label>
+      <input
+        type="text"
+        name="second_surname"
+        id="second_surname"
+        appFormcontrolUi
+        formControlName="second_surname"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-x-4 mb-4">
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="first_name">Primer Nombre</label>
+      <input
+        type="text"
+        name="first_name"
+        id="first_name"
+        appFormcontrolUi
+        formControlName="first_name"
+      />
+    </div>
+    <div class="flex flex-col grow">
+      <label class="font-bold optional" for="other_names">Otros Nombres</label>
+      <input
+        type="text"
+        name="other_names"
+        id="other_names"
+        appFormcontrolUi
+        formControlName="other_names"
+      />
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-x-4 mb-4">
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="country_id">País</label>
+      <select
+        name="country_id"
+        id="country_id"
+        appFormcontrolUi
+        formControlName="country_id"
+      >
+        @for (item of countries; track $index) {
+        <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="country_id">Área laboral</label>
+      <select
+        name="job_area_id"
+        id="job_area_id"
+        appFormcontrolUi
+        formControlName="job_area_id"
+      >
+        @for (item of countries; track $index) {
+        <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+  </div>
+
+  <div class="flex flex-col sm:flex-row gap-x-4 mb-4">
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="id_document_id">Tipo de documento</label>
+      <select
+        name="id_document_id"
+        id="id_document_id"
+        appFormcontrolUi
+        formControlName="id_document_id"
+      >
+        @for (item of countries; track $index) {
+        <option [value]="item.value">{{ item.label }}</option>
+        }
+      </select>
+    </div>
+
+    <div class="flex flex-col grow">
+      <label class="font-bold" for="id_code">Número de Id</label>
+      <input
+        type="text"
+        name="id_code"
+        id="id_code"
+        appFormcontrolUi
+        formControlName="id_code"
+      />
+    </div>
+  </div>
+</form>
