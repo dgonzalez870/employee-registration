@@ -1,4 +1,7 @@
-import { CommonModule } from '@angular/common';
+import {
+  CommonModule,
+  Location,
+} from '@angular/common';
 import {
   Component,
   HostBinding,
@@ -8,6 +11,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 
@@ -55,5 +62,16 @@ export class EmployeeFormComponent {
     other_names: ['', Validators.maxLength(50)],
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  constructor(
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private location: Location
+  ) {}
+
+  save(): void {}
+
+  onCancel(): void {
+    this.location.back();
+  }
 }
