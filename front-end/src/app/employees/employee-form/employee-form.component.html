@@ -55,7 +55,7 @@
         appFormcontrolUi
         formControlName="country_id"
       >
-        @for (item of countries; track $index) {
+        @for (item of countries$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
         }
       </select>
@@ -69,7 +69,7 @@
         appFormcontrolUi
         formControlName="job_area_id"
       >
-        @for (item of countries; track $index) {
+        @for (item of jobAreas$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
         }
       </select>
@@ -85,7 +85,7 @@
         appFormcontrolUi
         formControlName="id_document_id"
       >
-        @for (item of countries; track $index) {
+        @for (item of documents$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
         }
       </select>

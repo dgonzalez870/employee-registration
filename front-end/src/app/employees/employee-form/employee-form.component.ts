@@ -11,12 +11,18 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
+import {
+  LoadCountriesService,
+} from '../services/load-countries/load-countries.service';
+import {
+  LoadDocumentsService,
+} from '../services/load-documents/load-documents.service';
+import {
+  LoadJobAreasService,
+} from '../services/load-job-areas/load-job-areas.service';
 
 @Component({
   selector: 'app-employee-form',
@@ -28,16 +34,10 @@ import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 export class EmployeeFormComponent {
   @HostBinding('class') classes = 'block';
 
-  countries = [
-    {
-      value: 1,
-      label: 'Colombia',
-    },
-    {
-      value: 2,
-      label: 'Estados Unidos',
-    },
-  ];
+  countries$ = this.loadCountriesService.exec();
+  documents$ = this.loadDocumentsService.exec();
+  jobAreas$ = this.loadJobAreasService.exec();
+
   NameValidators = [
     Validators.required,
     Validators.maxLength(20),
@@ -64,9 +64,11 @@ export class EmployeeFormComponent {
 
   constructor(
     private formBuilder: FormBuilder,
-    private router: Router,
     private activatedRoute: ActivatedRoute,
-    private location: Location
+    private location: Location,
+    private loadCountriesService: LoadCountriesService,
+    private loadDocumentsService: LoadDocumentsService,
+    private loadJobAreasService: LoadJobAreasService
   ) {}
 
   save(): void {}
