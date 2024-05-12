@@ -1,0 +1,12 @@
+@for (item of options; track $index) {
+<div class="flex">
+  <input
+    #chekBoxes
+    type="checkbox"
+    [name]="'option' + $index"
+    [id]="'option' + $index"
+    [value]="item.value"
+  />
+  <label [for]="'option' + $index">{{ item.label }}</label>
+</div>
+}

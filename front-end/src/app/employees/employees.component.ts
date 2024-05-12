@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   HostBinding,
@@ -7,7 +8,7 @@ import { RouterOutlet } from '@angular/router';
 @Component({
   selector: 'app-employees',
   standalone: true,
-  imports: [RouterOutlet],
+  imports: [RouterOutlet, CommonModule],
   templateUrl: './employees.component.html',
   styleUrl: './employees.component.scss',
   providers: [],

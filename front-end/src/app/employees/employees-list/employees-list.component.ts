@@ -1,9 +1,31 @@
 import { CommonModule } from '@angular/common';
 import {
   Component,
+  HostBinding,
+  OnDestroy,
   OnInit,
 } from '@angular/core';
+import {
+  FormBuilder,
+  FormGroup,
+  ReactiveFormsModule,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
+import {
+  debounceTime,
+  distinctUntilChanged,
+  Subscription,
+} from 'rxjs';
+
+import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
+import {
+  SelectMultipleComponent,
+  SelectOptions,
+} from '../../lib/select-multiple';
 import {
   EmployeesInfoCardComponent,
 } from './employees-info-card/employees-info-card.component';
@@ -12,16 +34,72 @@ import { EmployeesListService } from './employees-list.service';
 @Component({
   selector: 'app-employees-list',
   standalone: true,
-  imports: [EmployeesInfoCardComponent, CommonModule],
+  imports: [
+    EmployeesInfoCardComponent,
+    CommonModule,
+    ReactiveFormsModule,
+    FormcontrolUiDirective,
+    SelectMultipleComponent,
+  ],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss',
 })
-export class EmployeesListComponent implements OnInit {
+export class EmployeesListComponent implements OnInit, OnDestroy {
+  @HostBinding('class') className = 'block h-full';
+
   public employees$ = this.employeesListService.getEmployees$();
 
-  constructor(private employeesListService: EmployeesListService) {}
+  public searchForm: FormGroup = this.formBuilder.group({
+    term: [''],
+    countries: [''],
+    documents: [''],
+    jobAreas: [''],
+  });
+
+  public countriesOptions: SelectOptions[] = [
+    {
+      label: 'Colombia',
+      value: 'CO',
+    },
+    {
+      label: 'Estados Unidos',
+      value: 'US',
+    },
+
+  ];
+
+  private sub$ = new Subscription();
+
+  constructor(
+    private employeesListService: EmployeesListService,
+    private formBuilder: FormBuilder,
+    private router: Router,
+    private activatedRoute: ActivatedRoute
+  ) {}
 
   ngOnInit(): void {
     this.employeesListService.searchEmployees();
+
+    this.sub$.add(
+      this.activatedRoute.queryParams.subscribe((params) => {
+        this.searchForm.patchValue(params, { emitEvent: false });
+      })
+    );
+
+    this.sub$.add(
+      this.searchForm.valueChanges
+        .pipe(debounceTime(300), distinctUntilChanged())
+        .subscribe((value) => {
+          this.router.navigate([], {
+            queryParams: {
+              ...value,
+            },
+          });
+        })
+    );
+  }
+
+  ngOnDestroy(): void {
+    this.sub$.unsubscribe();
   }
 }

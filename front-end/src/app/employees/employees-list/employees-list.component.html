@@ -1,9 +1,27 @@
+<div class="flex justify-end p-4 gap-8" [formGroup]="searchForm">
+  <select appFormcontrolUi name="document" id="document">
+    <option value="1">Cedula</option>
+    <option value="2">Pasaporte</option>
+  </select>
+  <select appFormcontrolUi name="jobArea" id="jobArea">
+    <option value="1">Admin</option>
+    <option value="2">Dev</option>
+  </select>
+  <input
+    appFormcontrolUi
+    type="text"
+    name="search"
+    id="search1"
+    placeholder="search"
+    formControlName="term"
+  />
+</div>
 <div
-  class="container grid grid-gap-4 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
+  class="container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 md:grid-cols-3"
 >
   @for (item of employees$ | async; track $index) {
   <app-employees-info-card
-    class="shadow-md rounded p-4"
+    class="shadow-lg rounded p-4"
     [data]="item"
   ></app-employees-info-card>
   }
