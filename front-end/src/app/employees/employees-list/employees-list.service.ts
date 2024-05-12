@@ -6,21 +6,21 @@ import {
 } from 'rxjs';
 
 import { SelectOptions } from '../../lib/select-multiple';
-import { EmployeeInfo } from './models/employee-info';
 import {
   LoadCountriesService,
-} from './services/load-countries/load-countries.service';
+} from '../services/load-countries/load-countries.service';
 import {
   LoadDocumentsService,
-} from './services/load-documents/load-documents.service';
+} from '../services/load-documents/load-documents.service';
 import {
   LoadJobAreasService,
-} from './services/load-job-areas/load-job-areas.service';
-import { RemoveService } from './services/remove/remove.service';
-import { EmployeeSearchParams } from './services/search-employees/models';
+} from '../services/load-job-areas/load-job-areas.service';
+import { RemoveService } from '../services/remove/remove.service';
+import { EmployeeSearchParams } from '../services/search-employees/models';
 import {
   SearchEmployeesService,
-} from './services/search-employees/search-employees.service';
+} from '../services/search-employees/search-employees.service';
+import { EmployeeInfo } from './models/employee-info';
 
 @Injectable({
   providedIn: 'root',

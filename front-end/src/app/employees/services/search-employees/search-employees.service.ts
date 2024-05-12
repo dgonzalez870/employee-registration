@@ -9,8 +9,8 @@ import {
   of,
 } from 'rxjs';
 
-import { environment } from '../../../../../environments/environment';
-import { EmployeeInfo } from '../../models/employee-info';
+import { environment } from '../../../../environments/environment';
+import { EmployeeInfo } from '../../employees-list/models/employee-info';
 import { FakeEmployees } from './fake-data';
 import { EmployeeSearchParams } from './models';
 
