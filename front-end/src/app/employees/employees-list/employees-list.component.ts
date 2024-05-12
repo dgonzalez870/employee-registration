@@ -53,6 +53,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   public page = 1;
   public totalPages = 10;
+  public showModal = false;
 
   public searchForm: FormGroup = this.formBuilder.group({
     term: [''],
@@ -115,12 +116,15 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
 
   onCardAction(action: string, id: number): void {
     if (action === 'delete') {
-      // Handle delete action
-      alert('delete');
+      this.showModal = true;
     }
 
     if (action === 'edit') {
-      this.router.navigate([`/employees/edit/${id}`]);
+      this.router.navigate([`/employees/form/${id}`]);
     }
+  }
+
+  removeUser(): void {
+    this.showModal = false;
   }
 }
