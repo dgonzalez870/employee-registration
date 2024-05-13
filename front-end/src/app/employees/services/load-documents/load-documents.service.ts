@@ -6,8 +6,8 @@ import {
   Observable,
 } from 'rxjs';
 
-import { environment } from '../../../../../environments/environment';
-import { SelectOptions } from '../../../../lib/select-multiple';
+import { environment } from '../../../../environments/environment';
+import { SelectOptions } from '../../../lib/select-multiple';
 import {
   selectServiceResponse2Selectoptions,
 } from '../mappers/select-service-response-2-select-option';
@@ -16,14 +16,14 @@ import { SelectServiceResponse } from '../models/select-service-response';
 @Injectable({
   providedIn: 'root',
 })
-export class LoadCountriesService {
+export class LoadDocumentsService {
   constructor(private httpClient: HttpClient) {}
 
   public exec(): Observable<SelectOptions[]> {
-    return this.httpClient.get<SelectServiceResponse[]>(
-      `${environment.api.url}/countries`
-    ).pipe(
-      map(response => response.map(selectServiceResponse2Selectoptions))
-    );
+    return this.httpClient
+      .get<SelectServiceResponse[]>(`${environment.api.url}/documents`)
+      .pipe(
+        map((response) => response.map(selectServiceResponse2Selectoptions))
+      );
   }
 }
