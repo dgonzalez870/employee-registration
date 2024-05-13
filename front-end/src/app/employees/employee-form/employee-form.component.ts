@@ -1,7 +1,4 @@
-import {
-  CommonModule,
-  Location,
-} from '@angular/common';
+import { CommonModule } from '@angular/common';
 import {
   Component,
   HostBinding,
@@ -13,7 +10,10 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
 import {
   filter,
@@ -70,7 +70,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   constructor(
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
-    private location: Location,
+    private router: Router,
     private employeeFormService: EmployeeFormService
   ) {}
 
@@ -112,6 +112,8 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   }
 
   onCancel(): void {
-    this.location.back();
+    this.router.navigate(['/employees'], {
+      queryParamsHandling: 'merge',
+    });
   }
 }

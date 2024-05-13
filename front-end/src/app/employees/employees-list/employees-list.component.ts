@@ -122,7 +122,9 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
     }
 
     if (action === 'edit') {
-      this.router.navigate([`/employees/form/${id}`]);
+      this.router.navigate([`/employees/form/${id}`], {
+        queryParamsHandling: 'merge',
+      });
     }
   }
 
