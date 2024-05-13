@@ -111,8 +111,9 @@
       Cancelar
     </button>
     <button
-      type="button"
+      type="submit"
       class="rounded border p-2 text-green-500 font-bold"
+      [disabled]="submitDisabled"
       (click)="save()"
     >
       Guardar
