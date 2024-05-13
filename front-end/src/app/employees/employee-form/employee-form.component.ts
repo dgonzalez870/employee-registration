@@ -44,9 +44,10 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   ];
 
   form = this.formBuilder.group({
-    first_name: ['', this.NameValidators],
     first_surname: ['', this.NameValidators],
     second_surname: ['', this.NameValidators],
+    first_name: ['', this.NameValidators],
+    other_names: ['', Validators.maxLength(50)],
     country_id: ['', Validators.required],
     id_document_id: ['', Validators.required],
     id_code: [
@@ -57,8 +58,8 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
         Validators.pattern('[A-Za-z0-9]*'),
       ],
     ],
+    email: [{ value: '', disabled: true }, [Validators.email]],
     job_area_id: ['', Validators.required],
-    other_names: ['', Validators.maxLength(50)],
     admission_date: ['', [Validators.required]],
   });
 
@@ -86,9 +87,12 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
     );
 
     this.sub$.add(
-      this.employeeFormService.getEmployee$().pipe(filter(val => !!val)).subscribe((employee) => {
-        this.form.patchValue(employee as any, { emitEvent: false });
-      })
+      this.employeeFormService
+        .getEmployee$()
+        .pipe(filter((val) => !!val))
+        .subscribe((employee) => {
+          this.form.patchValue(employee as any, { emitEvent: false });
+        })
     );
 
     this.sub$.add(
