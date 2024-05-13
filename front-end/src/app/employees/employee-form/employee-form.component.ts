@@ -107,6 +107,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
   }
 
   save(): void {
+    this.submitDisabled = true;
     this.employeeFormService.createEmployee(this.form.value as any);
   }
 
