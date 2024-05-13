@@ -53,7 +53,7 @@
 <div class="flex justify-center">
   <app-paginator
     [currentPage]="page"
-    [totalPages]="totalPages"
+    [totalPages]="(totalPages$ | async) || 0"
     (pageChange)="onPageChange($event)"
   ></app-paginator>
 </div>

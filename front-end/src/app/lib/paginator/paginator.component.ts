@@ -20,8 +20,8 @@ import { FormcontrolUiDirective } from '../formcontrol-ui';
 export class PaginatorComponent {
   @HostBinding('class') classes = 'flex';
 
-  @Input() totalPages = 1;
-  @Input() currentPage = 1;
+  @Input() totalPages: number = 1;
+  @Input() currentPage: number = 1;
 
   @Output() pageChange = new EventEmitter<number>();
 
