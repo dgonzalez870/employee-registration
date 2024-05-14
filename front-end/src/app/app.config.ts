@@ -9,8 +9,12 @@ import { routes } from './app.routes';
 import { ErrorHandlerService } from './lib/error-handler/error-handler.service';
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideRouter(routes), provideHttpClient(), {
-    provide: ErrorHandler,
-    useExisting: ErrorHandlerService,
-  }],
+  providers: [
+    provideRouter(routes),
+    provideHttpClient(),
+    {
+      provide: ErrorHandler,
+      useExisting: ErrorHandlerService,
+    },
+  ],
 };
