@@ -9,6 +9,7 @@
         id="first_surname"
         appFormcontrolUi
         formControlName="first_surname"
+        appControlError
       />
     </div>
     <div class="flex flex-col grow">
@@ -19,6 +20,7 @@
         id="second_surname"
         appFormcontrolUi
         formControlName="second_surname"
+        appControlError
       />
     </div>
   </div>
@@ -32,6 +34,7 @@
         id="first_name"
         appFormcontrolUi
         formControlName="first_name"
+        appControlError
       />
     </div>
     <div class="flex flex-col grow">
@@ -54,6 +57,7 @@
         id="country_id"
         appFormcontrolUi
         formControlName="country_id"
+        appControlError
       >
         @for (item of countries$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
@@ -68,6 +72,7 @@
         id="id_document_id"
         appFormcontrolUi
         formControlName="id_document_id"
+        appControlError
       >
         @for (item of documents$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
@@ -83,6 +88,7 @@
         id="id_code"
         appFormcontrolUi
         formControlName="id_code"
+        appControlError
       />
     </div>
   </div>
@@ -96,6 +102,7 @@
         id="email"
         appFormcontrolUi
         formControlName="email"
+        appControlError
       />
     </div>
 
@@ -107,6 +114,7 @@
         id="admission_date"
         appFormcontrolUi
         formControlName="admission_date"
+        appControlError
       />
     </div>
 
@@ -117,6 +125,7 @@
         id="job_area_id"
         appFormcontrolUi
         formControlName="job_area_id"
+        appControlError
       >
         @for (item of jobAreas$ | async; track $index) {
         <option [value]="item.value">{{ item.label }}</option>
@@ -135,7 +144,7 @@
     </button>
     <button
       type="submit"
-      class="rounded border p-2 text-green-500 font-bold"
+      class="rounded border p-2 text-green-500 font-bold disabled:opacity-50 disabled:font-normal"
       [disabled]="submitDisabled"
       (click)="save()"
     >
