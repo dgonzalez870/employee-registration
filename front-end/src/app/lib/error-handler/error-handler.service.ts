@@ -12,6 +12,11 @@ export class ErrorHandlerService implements ErrorHandler {
   constructor(private statusInfoService: StatusInfoService) {}
 
   handleError(error: any): void {
-    this.statusInfoService.setError(error.message);
+    // TODO: Add error logging and handle error by code
+    // This implementation is just for demo purposes
+    // and shows a generic error
+    this.statusInfoService.setError(
+      'Tenemos un problema,por favor intenete nuevamente más tarde'
+    );
   }
 }
