@@ -1,7 +1,4 @@
-<div
-  class="container mx-auto flex flex-wrap justify-end p-4 gap-8"
-  [formGroup]="searchForm"
->
+<div class="flex flex-wrap justify-end p-4 gap-8" [formGroup]="searchForm">
   <button
     class="rounded border text-red-500 p-2"
     type="button"
@@ -55,9 +52,7 @@
     formControlName="term"
   />
 </div>
-<div
-  class="cards-container container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 grow"
->
+<div class="cards-container grid gap-8 grid-cols-1 sm:grid-cols-2 grow">
   @for (item of employees$ | async; track $index) {
   <app-employees-info-card
     class="shadow-lg rounded p-4 max-h-30"
@@ -67,7 +62,7 @@
   }
 </div>
 
-<div class="flex justify-center flex-wrap p-4 container mx-auto">
+<div class="flex justify-center flex-wrap p-4">
   <app-paginator
     class="ml-auto grow sm:grow-0"
     [currentPage]="page"
@@ -77,6 +72,8 @@
   <button
     type="button"
     class="bg-green-500 text-white p-2 rounded ml-auto mt-2"
+    [routerLink]="['/employees/form']"
+    routerLinkActive="router-link-active"
   >
     Agregar registro
   </button>

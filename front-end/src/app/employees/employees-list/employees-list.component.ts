@@ -13,6 +13,7 @@ import {
 import {
   ActivatedRoute,
   Router,
+  RouterLink,
 } from '@angular/router';
 
 import {
@@ -39,12 +40,13 @@ import { EmployeesListService } from './employees-list.service';
     FormcontrolUiDirective,
     SelectMultipleComponent,
     PaginatorComponent,
+    RouterLink,
   ],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss',
 })
 export class EmployeesListComponent implements OnInit, OnDestroy {
-  @HostBinding('class') className = 'flex flex-col h-full';
+  @HostBinding('class') className = 'flex flex-col h-full container mx-auto';
 
   public employees$ = this.employeesListService.getEmployees$();
   public countries$ = this.employeesListService.getCountries$();
