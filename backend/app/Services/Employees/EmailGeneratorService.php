@@ -2,6 +2,9 @@
 
 namespace App\Services\Employees;
 
+/**
+ * This service is used to generate email Address
+ */
 class EmailGeneratorService
 {
 
@@ -14,6 +17,9 @@ class EmailGeneratorService
     return $name . '.' . $surname . '.' . ($regCount > 0 ? $regCount + 1 : '') . '@' . $emailDomain . '.' . $countryCode;
   }
 
+  /**
+   * Generates a regex to be used in MySQL query
+   */
   public function getEmailPattern($data): string
   {
     $name = $data['first_name'];

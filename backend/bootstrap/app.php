@@ -36,7 +36,8 @@ return Application::configure(basePath: dirname(__DIR__))
             }
 
             return response()->json(
-                ['message' => $e->getMessage()]
+                ['message' => $e->getMessage()],
+                500
             );
         });
     })->create();
