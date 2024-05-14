@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Countries\FindAllCountriesController;
 use App\Http\Controllers\Employees\DeleteEmployeeController;
+use App\Http\Controllers\Employees\GetEmployeeDetailsController;
 use App\Http\Controllers\Employees\RegisterEmployeeController;
 use App\Http\Controllers\Employees\SearchController;
 use App\Http\Controllers\Employees\UpdateEmployeeController;
@@ -28,6 +29,7 @@ Route::prefix('jobareas')->group(function () {
 
 Route::prefix('employees')->group(function () {
     Route::get('/', [SearchController::class, 'exec']);
+    Route::get('/{id}', [GetEmployeeDetailsController::class, 'exec']); // NOSONAR
     Route::post('/', [RegisterEmployeeController::class, 'exec']);
     Route::delete('/{id}', [DeleteEmployeeController::class, 'exec']);
     Route::patch('/{id}', [UpdateEmployeeController::class, 'exec']);
