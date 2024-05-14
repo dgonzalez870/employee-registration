@@ -27,6 +27,27 @@ class SearchEmployeesService
     ];
   }
 
+  public function transform2ArrayIfIsNot($data)
+  {
+    if (is_array($data)) {
+      return $data;
+    }
+
+    return [$data];
+  }
+
+
+  public function getArrayQueryParam(string $name, $data)
+  {
+    $param = $data[$name] ?? null;
+
+    if ($param) {
+      return $this->transform2ArrayIfIsNot($param);
+    }
+
+    return $param;
+  }
+
   /**
    * Builds the base query for the search, this query
    * will be used for searching and counting, allowing get
@@ -36,9 +57,9 @@ class SearchEmployeesService
   public function getBaseQuery($query)
   {
     $term = $query['term'] ?? null;
-    $countries = $query['countries'] ?? null;
-    $jobAreas = $query['jobAreas'] ?? null;
-    $idDocuments = $query['idDocuments'] ?? null;
+    $countries = $this->getArrayQueryParam('countries', $query);
+    $jobAreas = $this->getArrayQueryParam('jobAreas', $query);
+    $idDocuments = $this->getArrayQueryParam('documents', $query);
 
     return Employee::when($term, function ($q) use ($term) {
 
