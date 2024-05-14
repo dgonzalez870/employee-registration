@@ -1,87 +1,85 @@
-<div class="flex justify-end p-4 gap-8" [formGroup]="searchForm" *ngIf="true">
+<div class="flex flex-wrap justify-end p-4 gap-8" [formGroup]="searchForm">
+  <button
+    class="rounded border text-red-500 p-2"
+    type="button"
+    (click)="searchForm.reset()"
+  >
+    Limpiar filtros
+  </button>
   <select
+    class="grow"
     appFormcontrolUi
     name="documents"
     id="documents"
     formControlName="documents"
   >
+    <option value="" disabled selected hidden>Tipo de documento</option>
     @for (item of documents$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <select
+    class="grow"
     appFormcontrolUi
     name="countries"
     id="countries"
     formControlName="countries"
   >
+    <option value="" disabled selected hidden>País</option>
     @for (item of countries$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <select
+    class="grow"
     appFormcontrolUi
     name="jobAreas"
     id="jobAreas"
     formControlName="jobAreas"
   >
+    <option value="" disabled selected hidden>Área</option>
     @for (item of jobAreas$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <input
+    class="grow"
     appFormcontrolUi
     type="text"
     name="search"
     id="search1"
-    placeholder="search"
+    placeholder="Nombre, apellido, email, identificación..."
     formControlName="term"
   />
 </div>
-<div
-  class="cards-container container mx-auto grid gap-8 grid-cols-1 sm:grid-cols-2 grow"
->
+<div class="cards-container grid gap-8 grid-cols-1 sm:grid-cols-2 grow">
   @for (item of employees$ | async; track $index) {
   <app-employees-info-card
-    class="shadow-lg rounded p-4 max-h-30"
+    class="shadow-lg rounded p-4 max-h-48"
     [data]="item"
     (action)="onCardAction($event, item.id)"
   ></app-employees-info-card>
   }
 </div>
 
-<div class="flex justify-center">
+<div class="flex justify-center flex-wrap p-4">
   <app-paginator
+    class="ml-auto grow sm:grow-0"
     [currentPage]="page"
     [totalPages]="(totalPages$ | async) || 0"
     (pageChange)="onPageChange($event)"
   ></app-paginator>
+  <button
+    type="button"
+    class="bg-green-500 text-white p-2 rounded ml-auto mt-2"
+    [routerLink]="['/employees/form']"
+    routerLinkActive="router-link-active"
+  >
+    Agregar registro
+  </button>
 </div>
 
 @if (showModal) {
-<div
-  class="fixed h-full w-full ease-in duration-1000 flex items-center justify-center bg-gray-500 bg-opacity-75 transition-opacity"
-  (click)="showModal = false"
->
-  <div class="min-h-10 min-w-30 bg-white p-4 shadow-lg rounded">
-    <div class="font-bold">Eliminar Empleado</div>
-    <div class="mt-4">¿Está seguro de eliminar al usuario?</div>
-    <div class="flex justify-end mt-8">
-      <button
-        type="button"
-        class="border rounded p-2 bg-red-500 text-white mr-4"
-        (click)="removeUser()"
-      >
-        Borrar
-      </button>
-      <button
-        type="button"
-        class="border rounded p-2"
-        (click)="showModal = false"
-      >
-        Cancelar
-      </button>
-    </div>
-  </div>
-</div>
+<app-delete-confirm (confirm)="removeUser()" (cancel)="showModal = false">
+</app-delete-confirm>
 }

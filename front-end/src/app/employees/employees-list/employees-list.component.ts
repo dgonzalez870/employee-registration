@@ -13,6 +13,7 @@ import {
 import {
   ActivatedRoute,
   Router,
+  RouterLink,
 } from '@angular/router';
 
 import {
@@ -24,6 +25,9 @@ import {
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 import { PaginatorComponent } from '../../lib/paginator';
 import { SelectMultipleComponent } from '../../lib/select-multiple';
+import {
+  DeleteConfirmComponent,
+} from './delete-confirm/delete-confirm.component';
 import {
   EmployeesInfoCardComponent,
 } from './employees-info-card/employees-info-card.component';
@@ -39,12 +43,14 @@ import { EmployeesListService } from './employees-list.service';
     FormcontrolUiDirective,
     SelectMultipleComponent,
     PaginatorComponent,
+    RouterLink,
+    DeleteConfirmComponent,
   ],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss',
 })
 export class EmployeesListComponent implements OnInit, OnDestroy {
-  @HostBinding('class') className = 'flex flex-col h-full';
+  @HostBinding('class') className = 'flex flex-col h-full container mx-auto';
 
   public employees$ = this.employeesListService.getEmployees$();
   public countries$ = this.employeesListService.getCountries$();

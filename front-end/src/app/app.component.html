@@ -1,1 +1,9 @@
+@if (status) {
+<app-status-info
+  [statusType]="status"
+  [message]="statusMessage || ''"
+  (close)="closeInfo()"
+></app-status-info>
+}
+
 <router-outlet />

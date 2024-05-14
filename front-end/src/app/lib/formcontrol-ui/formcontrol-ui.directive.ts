@@ -5,6 +5,17 @@ import {
   Renderer2,
 } from '@angular/core';
 
+/**
+ * This directive adds a class to the form control element
+ * so that it can be styled with tailwind (or any other framework)
+ *
+ * @example
+ *
+ * ```htms
+ * <label>Name</label>
+ * <input type="text" appFormcontrolUi/>
+ * ```
+ */
 @Directive({
   selector: '[appFormcontrolUi]',
   standalone: true,

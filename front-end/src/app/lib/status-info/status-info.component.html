@@ -1,0 +1,18 @@
+<div
+  class="fixed z-10 flex gap-12 items-center justify-between top-8 right-16 text-white p-8 min-h-16 rounded"
+  [ngClass]="{
+    'bg-red-500': statusType === 'ERROR',
+    'bg-green-500': statusType === 'SUCCESS'
+  }"
+>
+  <span>
+    {{ message }}
+  </span>
+  <button
+    type="button"
+    class="rounded-full border border-white min-w-12 min-h-12"
+    (click)="onClose()"
+  >
+    X
+  </button>
+</div>

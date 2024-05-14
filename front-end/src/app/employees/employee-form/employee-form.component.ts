@@ -20,13 +20,21 @@ import {
   Subscription,
 } from 'rxjs';
 
+import {
+  ControlErrorDirective,
+} from '../../lib/control-error/control-error.directive';
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 import { EmployeeFormService } from './employee-form.service';
 
 @Component({
   selector: 'app-employee-form',
   standalone: true,
-  imports: [ReactiveFormsModule, FormcontrolUiDirective, CommonModule],
+  imports: [
+    ReactiveFormsModule,
+    FormcontrolUiDirective,
+    CommonModule,
+    ControlErrorDirective,
+  ],
   templateUrl: './employee-form.component.html',
   styleUrl: './employee-form.component.scss',
 })
@@ -65,6 +73,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   submitDisabled = true;
 
+  private id!: number;
   private sub$ = new Subscription();
 
   constructor(
@@ -82,6 +91,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
         const id = params['id'];
         if (id) {
           this.employeeFormService.loadEmployee(id);
+          this.id = id;
         }
       })
     );
@@ -108,6 +118,10 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   save(): void {
     this.submitDisabled = true;
+    if (this.id) {
+      this.employeeFormService.updateEmployee(this.id, this.form.value as any);
+      return;
+    }
     this.employeeFormService.createEmployee(this.form.value as any);
   }
 
