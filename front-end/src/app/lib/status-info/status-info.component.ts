@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 import {
   Component,
   EventEmitter,
@@ -12,7 +13,7 @@ import { StatusInfo } from './status-info.service';
 @Component({
   selector: 'app-status-info',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './status-info.component.html',
   styleUrl: './status-info.component.scss',
 })

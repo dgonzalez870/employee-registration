@@ -8,6 +8,7 @@ import {
 } from 'rxjs';
 
 import { SelectOptions } from '../../lib/select-multiple';
+import { StatusInfoService } from '../../lib/status-info/status-info.service';
 import {
   CreateEmployeeService,
 } from '../services/create-employee/create-employee.service';
@@ -45,7 +46,8 @@ export class EmployeeFormService {
     private createEmployeeService: CreateEmployeeService,
     private loadCountriesService: LoadCountriesService,
     private loadDocumentsService: LoadDocumentsService,
-    private loadJobAreasService: LoadJobAreasService
+    private loadJobAreasService: LoadJobAreasService,
+    private statusInfoService: StatusInfoService
   ) {}
 
   public loadEmployee(id: number): void {
@@ -65,7 +67,9 @@ export class EmployeeFormService {
     this.updateEmployeeService
       .exec(id, data)
       .pipe(finalize(() => this.loading$.next(false)))
-      .subscribe();
+      .subscribe(() =>
+        this.statusInfoService.setSuccess('Registro actualizado con éxito')
+      );
   }
 
   public createEmployee(data: CreateEmployee): void {
@@ -74,7 +78,9 @@ export class EmployeeFormService {
     this.createEmployeeService
       .exec(data)
       .pipe(finalize(() => this.loading$.next(false)))
-      .subscribe();
+      .subscribe(() =>
+        this.statusInfoService.setSuccess('Registro creado con éxito')
+      );
   }
 
   public getEmployee$(): Observable<GetEmployeeResponse | null> {
