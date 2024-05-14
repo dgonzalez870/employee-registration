@@ -50,9 +50,9 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
   public countries$ = this.employeesListService.getCountries$();
   public documents$ = this.employeesListService.getDocuments$();
   public jobAreas$ = this.employeesListService.getJobAreas$();
+  public totalPages$ = this.employeesListService.getTotalPages$();
 
   public page = 1;
-  public totalPages = 10;
   public showModal = false;
 
   public searchForm: FormGroup = this.formBuilder.group({
@@ -94,7 +94,7 @@ export class EmployeesListComponent implements OnInit, OnDestroy {
           this.router.navigate([], {
             queryParams: {
               ...value,
-              page: this.page,
+              page: 1,
             },
           });
         })

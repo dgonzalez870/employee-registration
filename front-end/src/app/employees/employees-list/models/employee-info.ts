@@ -7,3 +7,10 @@ export interface EmployeeInfo {
   document: string;
   idCode: string;
 }
+
+export interface EmployeePagination {
+  currentPage: number;
+  totalPages: number;
+
+  employees: EmployeeInfo[];
+}

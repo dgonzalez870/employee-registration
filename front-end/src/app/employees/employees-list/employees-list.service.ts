@@ -42,6 +42,8 @@ export class EmployeesListService {
     SelectOptions[]
   >([]);
 
+  private totalPages$: BehaviorSubject<number> = new BehaviorSubject<number>(0);
+
   constructor(
     private searchEmployeesService: SearchEmployeesService,
     private loadCountriesService: LoadCountriesService,
@@ -66,9 +68,14 @@ export class EmployeesListService {
     return this.jobAreas$.asObservable();
   }
 
+  public getTotalPages$(): Observable<number> {
+    return this.totalPages$.asObservable();
+  }
+
   public searchEmployees(query: EmployeeSearchParams): void {
-    this.searchEmployeesService.exec(query).subscribe((employees) => {
-      this.employees$.next(employees);
+    this.searchEmployeesService.exec(query).subscribe((data) => {
+      this.employees$.next(data.employees);
+      this.totalPages$.next(data.totalPages);
     });
   }
 
