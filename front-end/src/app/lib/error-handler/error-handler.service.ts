@@ -5,6 +5,9 @@ import {
 
 import { StatusInfoService } from '../status-info/status-info.service';
 
+/**
+ * This class handles errors in a centralized place of the application
+ */
 @Injectable({
   providedIn: 'root',
 })

@@ -4,6 +4,9 @@ import {
   Output,
 } from '@angular/core';
 
+/**
+ * This component is used to confirm a delete Employee action.
+ */
 @Component({
   selector: 'app-delete-confirm',
   standalone: true,
@@ -12,7 +15,6 @@ import {
   styleUrl: './delete-confirm.component.scss',
 })
 export class DeleteConfirmComponent {
-
   @Output() confirm = new EventEmitter<void>();
   @Output() cancel = new EventEmitter<void>();
 
