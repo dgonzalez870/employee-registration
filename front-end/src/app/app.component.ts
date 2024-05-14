@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   ChangeDetectorRef,
   Component,
 } from '@angular/core';
@@ -15,6 +16,7 @@ import { StatusInfoService } from './lib/status-info/status-info.service';
   imports: [RouterOutlet, StatusInfoComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class AppComponent {
   title = 'front-end';
@@ -30,21 +32,23 @@ export class AppComponent {
   ) {}
 
   ngOnInit(): void {
-    console.log('init app....');
     this.sub$.add(
-      this.statusInfoService
-        .getStatusInfo$()
-        // .pipe(filter((val) => !!val))
-        .subscribe((status) => {
-          console.log({ status });
-          this.status = status?.status ?? null;
-          this.statusMessage = status?.message ?? null;
-          this.cdr.markForCheck();
-        })
+      this.statusInfoService.getStatusInfo$().subscribe((status) => {
+        console.log({ status });
+        this.status = status?.status ?? null;
+        this.statusMessage = status?.message ?? null;
+        this.cdr.detectChanges();
+      })
     );
   }
 
   ngOnDestroy(): void {
     this.sub$.unsubscribe();
+  }
+
+  closeInfo(): void {
+    this.status = null;
+    this.statusMessage = null;
+    this.cdr.detectChanges();
   }
 }
