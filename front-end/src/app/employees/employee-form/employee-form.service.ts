@@ -1,32 +1,17 @@
 import { Injectable } from '@angular/core';
 
-import {
-  BehaviorSubject,
-  finalize,
-  forkJoin,
-  Observable,
-} from 'rxjs';
+import { BehaviorSubject, finalize, forkJoin, Observable } from 'rxjs';
 
 import { SelectOptions } from '../../lib/select-multiple';
 import { StatusInfoService } from '../../lib/status-info/status-info.service';
-import {
-  CreateEmployeeService,
-} from '../services/create-employee/create-employee.service';
+import { CreateEmployeeService } from '../services/create-employee/create-employee.service';
 import { GetProfileService } from '../services/get-profile/get-profile.service';
-import {
-  LoadCountriesService,
-} from '../services/load-countries/load-countries.service';
-import {
-  LoadDocumentsService,
-} from '../services/load-documents/load-documents.service';
-import {
-  LoadJobAreasService,
-} from '../services/load-job-areas/load-job-areas.service';
+import { LoadCountriesService } from '../services/load-countries/load-countries.service';
+import { LoadDocumentsService } from '../services/load-documents/load-documents.service';
+import { LoadJobAreasService } from '../services/load-job-areas/load-job-areas.service';
 import { CreateEmployee } from '../services/models/create-employee';
 import { GetEmployeeResponse } from '../services/models/get-employee-response';
-import {
-  UpdateEmployeeService,
-} from '../services/update-employee/update-employee.service';
+import { UpdateEmployeeService } from '../services/update-employee/update-employee.service';
 
 @Injectable({
   providedIn: 'root',
@@ -78,9 +63,10 @@ export class EmployeeFormService {
     this.createEmployeeService
       .exec(data)
       .pipe(finalize(() => this.loading$.next(false)))
-      .subscribe(() =>
-        this.statusInfoService.setSuccess('Registro creado con éxito')
-      );
+      .subscribe((response) => {
+        this.employee$.next(response);
+        this.statusInfoService.setSuccess('Registro creado con éxito');
+      });
   }
 
   public getEmployee$(): Observable<GetEmployeeResponse | null> {
@@ -112,5 +98,9 @@ export class EmployeeFormService {
         this.documents$.next(values[1]);
         this.jobAreas$.next(values[2]);
       });
+  }
+
+  clearEmployee(): void {
+    this.employee$.next(null);
   }
 }

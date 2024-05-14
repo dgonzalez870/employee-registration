@@ -1,28 +1,11 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  HostBinding,
-  OnDestroy,
-  OnInit,
-} from '@angular/core';
-import {
-  FormBuilder,
-  ReactiveFormsModule,
-  Validators,
-} from '@angular/forms';
-import {
-  ActivatedRoute,
-  Router,
-} from '@angular/router';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 
-import {
-  filter,
-  Subscription,
-} from 'rxjs';
+import { filter, Subscription } from 'rxjs';
 
-import {
-  ControlErrorDirective,
-} from '../../lib/control-error/control-error.directive';
+import { ControlErrorDirective } from '../../lib/control-error/control-error.directive';
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 import { EmployeeFormService } from './employee-form.service';
 
@@ -114,6 +97,7 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.sub$.unsubscribe();
+    this.employeeFormService.clearEmployee();
   }
 
   save(): void {
