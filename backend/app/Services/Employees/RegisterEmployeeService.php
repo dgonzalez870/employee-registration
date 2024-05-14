@@ -46,10 +46,10 @@ class RegisterEmployeeService
     );
 
     // Retrieves the employees having a similar email
-    $registeredCount = Employee::whereRaw("email REGEXP '*$emailPattern*'")->count();
+    $registeredCount = Employee::whereRaw("email REGEXP '$emailPattern'")->count();
 
 
-    $email = $this->emailGeneratorService->exec($data, $registeredCount);
+    $email = $this->emailGeneratorService->exec($emailData, $registeredCount);
 
     $data['email'] = $email;
 

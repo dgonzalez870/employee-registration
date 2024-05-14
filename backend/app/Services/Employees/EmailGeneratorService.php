@@ -8,13 +8,18 @@ namespace App\Services\Employees;
 class EmailGeneratorService
 {
 
+  public function clearWhitespacesAndLowercase($original): string
+  {
+    return strtolower(preg_replace('/\s+/', '', $original));
+  }
+
   public function exec($data, int $regCount = 0): string
   {
-    $name = $data['first_name'];
-    $surname = $data['first_surname'];
+    $name = $this->clearWhitespacesAndLowercase($data['first_name']);
+    $surname = $this->clearWhitespacesAndLowercase($data['first_surname']);
     $emailDomain = env('EMAIL_DOMAIN', 'global.com');
     $countryCode = strtolower($data['country_code']);
-    return $name . '.' . $surname . '.' . ($regCount > 0 ? $regCount + 1 : '') . '@' . $emailDomain . '.' . $countryCode;
+    return $name . '.' . $surname . ($regCount > 0 ? $regCount + 1 : '') . '@' . $emailDomain . '.' . $countryCode;
   }
 
   /**
@@ -22,10 +27,10 @@ class EmailGeneratorService
    */
   public function getEmailPattern($data): string
   {
-    $name = $data['first_name'];
-    $surname = $data['first_surname'];
+    $name = $this->clearWhitespacesAndLowercase($data['first_name']);
+    $surname = $this->clearWhitespacesAndLowercase($data['first_surname']);
     $emailDomain = env('EMAIL_DOMAIN', 'global.com');
     $countryCode = strtolower($data['country_code']);
-    return '/' . $name . '.' . $surname . '\d@' . $emailDomain . '.' . $countryCode . '/';
+    return $name . '.' . $surname . '[0-9]*@' . $emailDomain . '.' . $countryCode;
   }
 }
