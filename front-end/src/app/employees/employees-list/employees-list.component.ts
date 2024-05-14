@@ -26,6 +26,9 @@ import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 import { PaginatorComponent } from '../../lib/paginator';
 import { SelectMultipleComponent } from '../../lib/select-multiple';
 import {
+  DeleteConfirmComponent,
+} from './delete-confirm/delete-confirm.component';
+import {
   EmployeesInfoCardComponent,
 } from './employees-info-card/employees-info-card.component';
 import { EmployeesListService } from './employees-list.service';
@@ -41,6 +44,7 @@ import { EmployeesListService } from './employees-list.service';
     SelectMultipleComponent,
     PaginatorComponent,
     RouterLink,
+    DeleteConfirmComponent,
   ],
   templateUrl: './employees-list.component.html',
   styleUrl: './employees-list.component.scss',
