@@ -1,40 +1,57 @@
-<div class="flex justify-end p-4 gap-8" [formGroup]="searchForm" *ngIf="true">
+<div
+  class="container mx-auto flex flex-wrap justify-end p-4 gap-8"
+  [formGroup]="searchForm"
+>
+  <button
+    class="rounded border text-red-500 p-2"
+    type="button"
+    (click)="searchForm.reset()"
+  >
+    Limpiar filtros
+  </button>
   <select
+    class="grow"
     appFormcontrolUi
     name="documents"
     id="documents"
     formControlName="documents"
   >
+    <option value="" disabled selected hidden>Tipo de documento</option>
     @for (item of documents$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <select
+    class="grow"
     appFormcontrolUi
     name="countries"
     id="countries"
     formControlName="countries"
   >
+    <option value="" disabled selected hidden>País</option>
     @for (item of countries$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <select
+    class="grow"
     appFormcontrolUi
     name="jobAreas"
     id="jobAreas"
     formControlName="jobAreas"
   >
+    <option value="" disabled selected hidden>Área</option>
     @for (item of jobAreas$ | async; track $index) {
     <option [value]="item.value">{{ item.label }}</option>
     }
   </select>
   <input
+    class="grow"
     appFormcontrolUi
     type="text"
     name="search"
     id="search1"
-    placeholder="search"
+    placeholder="Nombre, apellido, email, identificación..."
     formControlName="term"
   />
 </div>
@@ -50,12 +67,19 @@
   }
 </div>
 
-<div class="flex justify-center">
+<div class="flex justify-center flex-wrap p-4 container mx-auto">
   <app-paginator
+    class="ml-auto grow sm:grow-0"
     [currentPage]="page"
     [totalPages]="(totalPages$ | async) || 0"
     (pageChange)="onPageChange($event)"
   ></app-paginator>
+  <button
+    type="button"
+    class="bg-green-500 text-white p-2 rounded ml-auto mt-2"
+  >
+    Agregar registro
+  </button>
 </div>
 
 @if (showModal) {
