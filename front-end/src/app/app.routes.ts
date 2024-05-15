@@ -11,4 +11,8 @@ export const routes: Routes = [
     loadChildren: () =>
       import('./employees/employees.routes').then((m) => m.routes),
   },
+  {
+    path: '**',
+    loadComponent: () => import('./not-found/not-found.component').then((m) => m.NotFoundComponent),
+  }
 ];
