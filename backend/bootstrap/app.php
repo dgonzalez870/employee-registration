@@ -1,12 +1,16 @@
 <?php
 
+use App\Utils\ModelNotFoundExceptionParser;
 use GuzzleHttp\Psr7\Message;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
 use Illuminate\Http\Request;
 use Illuminate\Validation\ValidationException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+
 
 return Application::configure(basePath: dirname(__DIR__))
     ->withRouting(
@@ -22,6 +26,15 @@ return Application::configure(basePath: dirname(__DIR__))
         //
         $exceptions->render(function (Throwable $e, Request $request) {
 
+            if ($e instanceof NotFoundHttpException) {
+                $previous = $e->getPrevious();
+                if ($previous instanceof ModelNotFoundException) {
+                    return response()->json([
+                        'message'   => ModelNotFoundExceptionParser::parse($previous),
+                    ], 404);
+                }
+            }
+
             if ($e instanceof HttpException) {
                 return response()->json([
                     'message' => $e->getMessage()
@@ -30,13 +43,16 @@ return Application::configure(basePath: dirname(__DIR__))
 
             if ($e instanceof ValidationException) {
                 return response()->json([
-                    'message'   => 'validation error',
+                    // Returns a generic validation message
+                    'message'   => 'Los datos de su solicitud no son correctos, por favor intente nuevamente',
                     'validator' => $e->validator->errors()->getMessages(),
                 ], 400);
             }
 
             return response()->json(
-                ['message' => $e->getMessage()],
+                // Returns a generic error message to the client, so the server does not return
+                // any sensitive information but still the errors can be seen in the logs.
+                ['message' => 'Tenemos un problema, por favor intente nuevamente más tarde'],
                 500
             );
         });
