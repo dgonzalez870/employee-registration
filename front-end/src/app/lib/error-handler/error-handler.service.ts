@@ -16,16 +16,16 @@ export class ErrorHandlerService implements ErrorHandler {
   constructor(private statusInfoService: StatusInfoService) {}
 
   handleError(error: any): void {
-    // TODO: Add error logging and handle error by code
-    // This implementation is just for demo purposes
-    // and shows a generic error
-
-    //
     if (error instanceof HttpErrorResponse) {
       this.statusInfoService.setError(
         error.error.message ||
           'Tenemos un problema,por favor intenete nuevamente más tarde'
       );
+    } else {
+      // TODO: Ask the user for authorization to log client errors to the server
+      // and provide an endpoint to log to
+      // For now, we just log the error to the console
+      console.error(error);
     }
   }
 }

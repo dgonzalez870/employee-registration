@@ -20,6 +20,7 @@ export class StatusInfoService {
 
   setStatusInfo(statusInfo: StatusInfo) {
     this.statusinfo$.next(statusInfo);
+    this.setTimer();
   }
 
   setError(message: string) {
@@ -28,5 +29,11 @@ export class StatusInfoService {
 
   setSuccess(message: string) {
     this.setStatusInfo({ status: 'SUCCESS', message });
+  }
+
+  private setTimer() {
+    setTimeout(() => {
+      this.statusinfo$.next(null);
+    }, 5000);
   }
 }

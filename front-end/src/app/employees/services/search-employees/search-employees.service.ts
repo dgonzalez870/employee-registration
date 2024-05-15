@@ -41,7 +41,9 @@ export class SearchEmployeesService {
 
     return {
       id: data.id,
-      name: `${first_surname} ${second_surname} ${first_name} ${other_names}`.trim(),
+      name: `${first_surname} ${second_surname} ${first_name} ${
+        other_names || ''
+      }`.trim(),
       email,
       country: data.country,
       jobArea: data.job_area,

@@ -34,7 +34,6 @@ export class AppComponent {
   ngOnInit(): void {
     this.sub$.add(
       this.statusInfoService.getStatusInfo$().subscribe((status) => {
-        console.log({ status });
         this.status = status?.status ?? null;
         this.statusMessage = status?.message ?? null;
         this.cdr.detectChanges();
