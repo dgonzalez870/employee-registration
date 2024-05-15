@@ -1,11 +1,28 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute, Router } from '@angular/router';
+import {
+  Component,
+  HostBinding,
+  OnDestroy,
+  OnInit,
+} from '@angular/core';
+import {
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import {
+  ActivatedRoute,
+  Router,
+} from '@angular/router';
 
-import { filter, Subscription } from 'rxjs';
+import {
+  filter,
+  Subscription,
+} from 'rxjs';
 
-import { ControlErrorDirective } from '../../lib/control-error/control-error.directive';
+import {
+  ControlErrorDirective,
+} from '../../lib/control-error/control-error.directive';
 import { FormcontrolUiDirective } from '../../lib/formcontrol-ui';
 import { EmployeeFormService } from './employee-form.service';
 
@@ -38,7 +55,10 @@ export class EmployeeFormComponent implements OnInit, OnDestroy {
     first_surname: ['', this.NameValidators],
     second_surname: ['', this.NameValidators],
     first_name: ['', this.NameValidators],
-    other_names: ['', Validators.maxLength(50)],
+    other_names: [
+      '',
+      [Validators.maxLength(50), Validators.pattern('[A-Z\\s]*')],
+    ],
     country_id: ['', Validators.required],
     id_document_id: ['', Validators.required],
     id_code: [
