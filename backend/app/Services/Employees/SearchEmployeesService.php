@@ -4,7 +4,6 @@ namespace App\Services\Employees;
 
 use App\Models\Employee;
 
-
 class SearchEmployeesService
 {
 
@@ -62,13 +61,11 @@ class SearchEmployeesService
     $idDocuments = $this->getArrayQueryParam('documents', $query);
 
     return Employee::when($term, function ($q) use ($term) {
-
-      $q->where('first_surname', 'like', '%' . $term . '%')
-        ->orWhere('second_surname', 'like', '%' . $term . '%')
-        ->orWhere('first_name', 'like', '%' . $term . '%')
-        ->orWhere('other_names', 'like', '%' . $term . '%')
-        ->orWhere('email', 'like', '%' . $term . '%')
-        ->orWhere('id_code', 'like', '%' . $term . '%');
+      $q->where(function ($q) use ($term) {
+        $q->whereRaw('CONCAT_WS(" ", first_surname, second_surname, first_name, other_names) like "%' . $term . '%"')
+          ->orWhere('email', 'like', '%' . $term . '%')
+          ->orWhere('id_code', 'like', '%' . $term . '%');
+      });
     })
       ->when($countries, function ($q) use ($countries) {
         $q->whereIn('country_id', $countries);
