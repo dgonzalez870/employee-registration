@@ -2,9 +2,7 @@
 
 namespace App\Services\Employees;
 
-use App\Models\Country;
 use App\Models\Employee;
-use Symfony\Component\HttpFoundation\Exception\BadRequestException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class RegisterEmployeeService
@@ -20,7 +18,6 @@ class RegisterEmployeeService
 
   public function exec($data)
   {
-    $county = Country::find($data['country_id']);
     $idCode = $data['id_code'];
 
     // Search for the employee with the same id code
@@ -37,21 +34,11 @@ class RegisterEmployeeService
       [
         'first_name' => $data['first_name'],
         'first_surname' => $data['first_surname'],
-        'country_code' => $county->code,
+        'country_id' => $data['country_id'],
       ];
 
-    // Creates a comparition email pattern
-    $emailPattern = $this->emailGeneratorService->getEmailPattern(
-      $emailData
-    );
 
-    // Retrieves the employees having a similar email
-    $registeredCount = Employee::whereRaw("email REGEXP '$emailPattern'")->count();
-
-
-    $email = $this->emailGeneratorService->exec($emailData, $registeredCount);
-
-    $data['email'] = $email;
+    $data['email'] = $this->emailGeneratorService->exec($emailData);
 
     return Employee::create($data);
   }
