@@ -1,3 +1,4 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import {
   ErrorHandler,
   Injectable,
@@ -18,8 +19,13 @@ export class ErrorHandlerService implements ErrorHandler {
     // TODO: Add error logging and handle error by code
     // This implementation is just for demo purposes
     // and shows a generic error
-    this.statusInfoService.setError(
-      'Tenemos un problema,por favor intenete nuevamente más tarde'
-    );
+
+    //
+    if (error instanceof HttpErrorResponse) {
+      this.statusInfoService.setError(
+        error.error.message ||
+          'Tenemos un problema,por favor intenete nuevamente más tarde'
+      );
+    }
   }
 }
