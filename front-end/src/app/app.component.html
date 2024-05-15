@@ -7,3 +7,11 @@
 }
 
 <router-outlet />
+
+@if (loading) {
+<div
+  class="fixed top-0 left-0 h-14 w-full flex justify-center items-center bg-gray-500 bg-opacity-20"
+>
+  <div class="text-xl text-white rounded p-2 bg-orange-300">Cargando...</div>
+</div>
+}

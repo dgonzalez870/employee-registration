@@ -12,6 +12,9 @@ export interface StatusInfo {
 })
 export class StatusInfoService {
   private statusinfo$ = new BehaviorSubject<StatusInfo | null>(null);
+
+  private loading$ = new BehaviorSubject<boolean>(false);
+
   constructor() {}
 
   getStatusInfo$() {
@@ -29,6 +32,14 @@ export class StatusInfoService {
 
   setSuccess(message: string) {
     this.setStatusInfo({ status: 'SUCCESS', message });
+  }
+
+  setLoading(loading: boolean) {
+    this.loading$.next(loading);
+  }
+
+  getLoading$() {
+    return this.loading$.asObservable();
   }
 
   private setTimer() {

@@ -23,6 +23,7 @@ export class AppComponent {
 
   status: 'ERROR' | 'SUCCESS' | null = null;
   statusMessage: string | null = null;
+  loading: boolean = false;
 
   private sub$ = new Subscription();
 
@@ -36,6 +37,12 @@ export class AppComponent {
       this.statusInfoService.getStatusInfo$().subscribe((status) => {
         this.status = status?.status ?? null;
         this.statusMessage = status?.message ?? null;
+        this.cdr.detectChanges();
+      })
+    );
+
+    this.sub$.add(
+      this.statusInfoService.getLoading$().subscribe((loading) => {
         this.cdr.detectChanges();
       })
     );
