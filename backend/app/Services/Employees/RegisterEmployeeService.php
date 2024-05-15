@@ -19,9 +19,10 @@ class RegisterEmployeeService
   public function exec($data)
   {
     $idCode = $data['id_code'];
+    $id_document_id = $data['id_document_id'];
 
     // Search for the employee with the same id code
-    $employee = Employee::where('id_code', $idCode)->first();
+    $employee = Employee::where('id_code', $idCode)->where('id_document_id', $id_document_id)->first();
 
     if ($employee) {
       throw new BadRequestHttpException(
